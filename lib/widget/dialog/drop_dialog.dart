@@ -47,7 +47,11 @@ class _DropDialogState extends State<DropDialog> with TickerProviderStateMixin {
 
   void maskOnClick() {
     maskController.reverse();
-    widget.callBack();
+    maskController.addStatusListener((status) {
+      if (status == AnimationStatus.dismissed) {
+        widget.callBack();
+      }
+    });
   }
 
   @override
