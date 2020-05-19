@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 /// 下拉 dialog
 ///
 /// 必须配合 Stack 使用
@@ -12,29 +13,30 @@ class DropDialog extends StatefulWidget {
 }
 
 class _DropDialogState extends State<DropDialog> with TickerProviderStateMixin {
-  List<AnimationController> drawerWidgetControllerList = [];
+  // List<AnimationController> drawerWidgetControllerList = [];
   bool maskIsShow = false;
   AnimationController maskController;
   Animation<double> maskAnimation;
 
-  final Duration animationDuration = Duration(milliseconds: 200);
+  final Duration animationDuration = Duration(milliseconds: 800);
 
   @override
   void initState() {
     super.initState();
     maskController =
         AnimationController(vsync: this, duration: animationDuration);
-    maskAnimation = Tween<double>(begin: 0, end: 0.7)
-        .animate(CurvedAnimation(parent: maskController, curve: Curves.linear));
+    maskController.forward();
+    // maskAnimation = Tween<double>(begin: 0, end: 0.7)
+    //     .animate(CurvedAnimation(parent: maskController, curve: Curves.linear));
 
-    maskAnimation.addStatusListener((status) {
-      /// 监听遮罩动画结束时
-      if (status == AnimationStatus.dismissed) {
-        setState(() {
-          maskIsShow = false;
-        });
-      }
-    });
+    // maskAnimation.addStatusListener((status) {
+    //   /// 监听遮罩动画结束时
+    //   if (status == AnimationStatus.dismissed) {
+    //     setState(() {
+    //       maskIsShow = false;
+    //     });
+    //   }
+    // });
   }
 
   @override
@@ -44,9 +46,8 @@ class _DropDialogState extends State<DropDialog> with TickerProviderStateMixin {
   }
 
   void maskOnClick() {
-    setState(() {
-      maskController.reverse();
-    });
+    maskController.reverse();
+    widget.callBack();
   }
 
   @override
@@ -58,7 +59,9 @@ class _DropDialogState extends State<DropDialog> with TickerProviderStateMixin {
         left: 0,
         right: 0,
         child: GestureDetector(
-          onTap: widget.callBack,
+          onTap: () {
+            return maskOnClick();
+          },
           child: Container(
             color: Color.fromRGBO(0, 0, 0, 0.2),
             alignment: Alignment.topCenter,
@@ -66,28 +69,33 @@ class _DropDialogState extends State<DropDialog> with TickerProviderStateMixin {
               onTap: () {
                 return maskOnClick();
               },
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: widget.padding ??
-                        EdgeInsets.only(
-                          top: 10,
-                          bottom: 20,
-                          left: 30,
-                          right: 30,
+              child: SlideTransition(
+                position: Tween(begin: Offset(0.0, -0.8), end: Offset(0.0, 0.0))
+                    .animate(CurvedAnimation(
+                        parent: maskController, curve: Curves.bounceOut)),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: widget.padding ??
+                          EdgeInsets.only(
+                            top: 10,
+                            bottom: 20,
+                            left: 30,
+                            right: 30,
+                          ),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10.0),
+                          bottomRight: Radius.circular(10.0),
                         ),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10.0),
-                        bottomRight: Radius.circular(10.0),
                       ),
-                    ),
-                    child: widget.child,
-                  )
-                ],
+                      child: widget.child,
+                    )
+                  ],
+                ),
               ),
             ),
           ),
