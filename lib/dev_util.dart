@@ -13,6 +13,8 @@ export 'package:dev_util/widget/toast/toast.dart';
 // export 'package:dev_util/util/dev_util.dart';
 export 'package:dev_util/util/log_util.dart';
 export 'package:dev_util/util/regex_util.dart';
+export 'package:dev_util/route/route_util.dart';
+export 'package:dev_util/route/route_transition.dart';
 
 /// time
 export 'package:dev_util/time/data_util.dart';
