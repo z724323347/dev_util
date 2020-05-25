@@ -58,7 +58,7 @@ class RouterUtils {
     Curve curve: Curves.fastOutSlowIn,
     SlideDirection direction: SlideDirection.right2left,
     Axis axis: Axis.vertical,
-    Function callBack,
+    Function(dynamic) callBack,
   }) {
     GlobalNavigator.push(RouteTransition(
       type: type,
