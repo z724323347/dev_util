@@ -1,4 +1,6 @@
 {
     "copy": "copy",
-    "copied": "copied"
+    "copied": "copied",
+    "showMore":"show more",
+    "showLess": "show less"
 }

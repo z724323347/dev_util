@@ -44,6 +44,24 @@ class S {
       args: [],
     );
   }
+
+  String get showMore {
+    return Intl.message(
+      '更多',
+      name: 'showMore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get showLess {
+    return Intl.message(
+      '关闭',
+      name: 'showLess',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

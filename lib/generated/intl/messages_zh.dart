@@ -22,6 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "copied" : MessageLookupByLibrary.simpleMessage("已复制"),
-    "copy" : MessageLookupByLibrary.simpleMessage("复制")
+    "copy" : MessageLookupByLibrary.simpleMessage("复制"),
+    "showLess" : MessageLookupByLibrary.simpleMessage("关闭"),
+    "showMore" : MessageLookupByLibrary.simpleMessage("更多")
   };
 }
