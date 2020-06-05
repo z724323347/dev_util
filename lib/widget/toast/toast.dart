@@ -1,4 +1,3 @@
-
 import 'package:dev_util/widget/toast/toast_overlay.dart';
 import 'package:dev_util/widget/toast/toast_view.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,7 @@ class Toast {
   static ToastPosition _p;
   // 是否横屏
   static bool _landscape = false;
-  static show(OverlayState context, String msg,
+  static void show(OverlayState context, String msg,
       {int time, bool landscape = false, ToastPosition position}) {
     preToast?.dismiss();
     preToast = null;
@@ -26,28 +25,28 @@ class Toast {
     _landscape = landscape ?? false;
     OverlayState overlayState = context;
 
-    var controllerShowAnim = new AnimationController(
+    var controllerShowAnim = AnimationController(
       vsync: overlayState,
       duration: Duration(milliseconds: 250),
     );
-    var controllerShowOffset = new AnimationController(
+    var controllerShowOffset = AnimationController(
       vsync: overlayState,
       duration: Duration(milliseconds: 350),
     );
-    var controllerHide = new AnimationController(
+    var controllerHide = AnimationController(
       vsync: overlayState,
       duration: Duration(milliseconds: 250),
     );
     var opacityAnim1 =
         new Tween(begin: 0.0, end: 1.0).animate(controllerShowAnim);
-    var controllerCurvedShowOffset = new CurvedAnimation(
+    var controllerCurvedShowOffset = CurvedAnimation(
         parent: controllerShowOffset, curve: _BounceOutCurve._());
     var offsetAnim =
         new Tween(begin: 30.0, end: 0.0).animate(controllerCurvedShowOffset);
-    var opacityAnim2 = new Tween(begin: 1.0, end: 0.0).animate(controllerHide);
+    var opacityAnim2 = Tween(begin: 1.0, end: 0.0).animate(controllerHide);
 
     OverlayEntry overlayEntry;
-    overlayEntry = new OverlayEntry(builder: (context) {
+    overlayEntry = OverlayEntry(builder: (context) {
       return ToastOverlay(
         opacityAnim1: opacityAnim1,
         opacityAnim2: opacityAnim2,
@@ -62,7 +61,7 @@ class Toast {
     toastView.controllerHide = controllerHide;
     toastView.overlayState = overlayState;
     preToast = toastView;
-    toastView.show(time);
+    toastView.show(Duration(milliseconds: time ?? 200));
   }
 
   static LayoutBuilder buildToastLayout(

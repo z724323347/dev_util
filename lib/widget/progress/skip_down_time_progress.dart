@@ -10,7 +10,7 @@ class SkipDownTimeProgress extends StatefulWidget {
   final Size size;
   final String skipText;
   final VoidCallback onTap;
-  final onFinishCallBack;
+  final Function onFinishCallBack;
 
   SkipDownTimeProgress(
       {Key key,

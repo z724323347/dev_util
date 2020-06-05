@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'route_util.dart';
 
-class RouteTransition extends PageRouteBuilder {
+class RouteTransition extends PageRouteBuilder<PageRouteBuilder> {
   final Widget fromPage;
   final Widget toPage;
   final Duration duration;

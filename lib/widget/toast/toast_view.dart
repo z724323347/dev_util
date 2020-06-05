@@ -9,21 +9,21 @@ class ToastView {
   OverlayState overlayState;
   bool dismissed = false;
 
-  show([time]) async {
+  void show(Duration duration) async {
     overlayState.insert(overlayEntry);
     controllerShowAnim.forward();
     controllerShowOffset.forward();
-    await Future.delayed(Duration(milliseconds: time == null ? 2000 : time));
+    await Future.delayed(duration, () {});
     this.dismiss();
   }
 
-  dismiss() async {
+  void dismiss() async {
     if (dismissed) {
       return;
     }
     this.dismissed = true;
     controllerHide.forward();
-    await Future.delayed(Duration(milliseconds: 250));
+    await Future.delayed(Duration(milliseconds: 250), () {});
     overlayEntry?.remove();
   }
 }

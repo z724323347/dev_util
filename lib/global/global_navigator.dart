@@ -17,7 +17,7 @@ class GlobalNavigator {
     @required WidgetBuilder builder,
     bool barrierDismissible = true,
     Color barrierColor = Colors.black54,
-    transitionDuration: const Duration(milliseconds: 150)
+    Duration transitionDuration = const Duration(milliseconds: 150)
   }) {
     assert(builder != null);
     final BuildContext _diglogCtx = navigatorKey.currentState.overlay.context;

@@ -8,7 +8,7 @@ import 'slide_pop_dialog.dart';
 class PopDialog {
   /// 全局弹窗 AlertDialog
   static void showGlobalAlert(Widget child, bool dismiss) {
-    GlobalNavigator.dialog(
+    GlobalNavigator.dialog<Route>(
         barrierDismissible: dismiss,
         builder: (_) {
           return GestureDetector(
@@ -25,7 +25,7 @@ class PopDialog {
   ///
   /// call 回调，部分需求的回调 (如，点击外部消失清空选中数据等)
   static void showGlobalMaterial(Widget child, bool dismiss, {Function call}) {
-    GlobalNavigator.dialog(
+    GlobalNavigator.dialog<Route>(
         barrierDismissible: dismiss,
         builder: (_) {
           return GestureDetector(
@@ -68,13 +68,13 @@ class PopDialog {
     Color bgColor,
     Duration transitionDuration = const Duration(milliseconds: 200),
   }) {
-    showGeneralDialog(
+    showGeneralDialog<Route>(
         context: DevUtils.context,
         transitionDuration: transitionDuration,
         barrierDismissible: true,
         barrierLabel: 'Confirm',
         barrierColor: bgColor ?? Colors.black.withOpacity(.5),
-        pageBuilder: (BuildContext context, Animation animation,
+        pageBuilder: (BuildContext context, Animation<double> animation,
             Animation secondaryAnimation) {
           return ScaleTransition(
             scale: animation,
@@ -94,7 +94,7 @@ class PopDialog {
     double height,
   }) {
     assert(child != null);
-    showGeneralDialog(
+    showGeneralDialog<Route>(
       context: DevUtils.context,
       pageBuilder: (context, animation1, animation2) {},
       barrierColor: barrierColor ?? Colors.black.withOpacity(0.5),

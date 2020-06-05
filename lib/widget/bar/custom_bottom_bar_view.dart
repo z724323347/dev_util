@@ -19,7 +19,7 @@ class _BottomBarViewState extends State<CustomBottomBarView>
     with TickerProviderStateMixin {
   AnimationController animationController;
 
-  Animation _animation;
+  Animation<double> _animation;
 
   @override
   void initState() {
@@ -51,7 +51,8 @@ class _BottomBarViewState extends State<CustomBottomBarView>
               child: PhysicalShape(
                 color: Colors.white,
                 elevation: 16.0,
-                clipper: TabClipper(radius: _animation.value * 38.0),
+                clipper: TabClipper(
+                    radius: double.parse(_animation.value.toString()) * 38.0),
                 child: Container(
                   height: 62,
                   padding: EdgeInsets.only(left: 8, right: 8, top: 4),
@@ -71,7 +72,9 @@ class _BottomBarViewState extends State<CustomBottomBarView>
                                 setRemoveAllSelection(widget.tabIconsList[1]);
                                 widget.changeIndex(1);
                               })),
-                      SizedBox(width: _animation.value * 64.0),
+                      SizedBox(
+                          width:
+                              double.parse(_animation.value.toString()) * 64.0),
                       Expanded(
                           child: TabIcons(
                               tabIconData: widget.tabIconsList[2],
@@ -166,7 +169,7 @@ class TabIcons extends StatefulWidget {
 }
 
 class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
-  Animation _animation;
+  Animation<double> _animation;
 
   @override
   void initState() {
@@ -181,7 +184,7 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
         }
       });
 
-    _animation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
         parent: widget.tabIconData.animationController,
         curve: Interval(0.2, 1.0, curve: Curves.fastOutSlowIn)));
     super.initState();

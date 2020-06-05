@@ -182,7 +182,9 @@ class _ExpandArrowState extends State<ExpandArrow> {
             size: widget.size,
           ),
         ),
-        onTap: widget.onTap,
+        onTap: () {
+          widget.onTap();
+        },
       ),
     );
   }

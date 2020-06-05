@@ -27,6 +27,9 @@ export 'package:dev_util/locale/cupertino_localizations_delegate.dart';
 
 /// global
 export 'package:dev_util/global/global_navigator.dart';
+export 'package:dev_util/widget/screen/wah_size_fit.dart';
+
+
 
 /// DevUtils
 class DevUtils {

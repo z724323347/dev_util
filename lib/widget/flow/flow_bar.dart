@@ -66,7 +66,9 @@ class _FlowBarState extends State<FlowBar> with SingleTickerProviderStateMixin {
               (widget.preferredSize ?? Size.fromHeight(56)).height),
           children: widget.datList
               .map((v) => GestureDetector(
-                    onTap: _onTap(v),
+                    onTap: () {
+                      _onTap(v);
+                    },
                     child: _buildChild(v),
                   ))
               .toList()),
@@ -81,11 +83,11 @@ class _FlowBarState extends State<FlowBar> with SingleTickerProviderStateMixin {
               BoxShadow(
                   color: _selectIndex == d.id
                       ? Colors.transparent
-                      : d.bgColor ?? Theme.of(context).accentColor,
+                      : Theme.of(context).accentColor,
                   offset: Offset(1, 1),
                   blurRadius: 2)
             ],
-            color: d.bgColor ?? Theme.of(context).accentColor,
+            color: Theme.of(context).accentColor,
             borderRadius: widget.borderRadius),
         height: (widget.preferredSize.height + 20),
         width: _width,
@@ -103,7 +105,7 @@ class _FlowBarState extends State<FlowBar> with SingleTickerProviderStateMixin {
       );
 
   /// onTap event
-  _onTap(FlowBarData d) {
+  void _onTap(FlowBarData d) {
     setState(() {
       _controller.reset();
       _controller.forward();

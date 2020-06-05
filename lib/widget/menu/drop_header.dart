@@ -60,7 +60,7 @@ class _DropHeaderState extends State<DropHeader>
     widget.controller.addListener(_onController);
   }
 
-  _onController() {
+  void _onController() {
     if (mounted) {
       setState(() {});
     }
@@ -105,7 +105,7 @@ class _DropHeaderState extends State<DropHeader>
     super.dispose();
   }
 
-  _menu(DropHeaderItem item) {
+  GestureDetector _menu(DropHeaderItem item) {
     int index = widget.items.indexOf(item);
     int menuIndex = widget.controller.menuIndex;
     _isShowDropDownItemWidget = index == menuIndex && widget.controller.isShow;
@@ -113,10 +113,10 @@ class _DropHeaderState extends State<DropHeader>
     return GestureDetector(
       onTap: () {
         final RenderBox overlay =
-            widget.stackKey.currentContext.findRenderObject();
+            widget.stackKey.currentContext.findRenderObject() as RenderBox;
 
         final RenderBox dropDownItemRenderBox =
-            _keyDropDownHeader.currentContext.findRenderObject();
+            _keyDropDownHeader.currentContext.findRenderObject() as RenderBox;
 
         var position =
             dropDownItemRenderBox.localToGlobal(Offset.zero, ancestor: overlay);

@@ -68,7 +68,7 @@ class RouterUtils {
       curve: curve,
       direction: direction,
       axis: axis,
-    )).then((data) => callBack(data));
+    )).then<dynamic>((data) => callBack(data));
   }
 
   /// popAndPushNamed
@@ -78,8 +78,9 @@ class RouterUtils {
 
   /// pushReplacement
   static void pushReplacement(Widget routePage) {
+    // MaterialPageRoute(builder: (context) => routePage),
     GlobalNavigator.pushReplacement(
-        MaterialPageRoute(builder: (context) => routePage));
+        MaterialPageRoute<Route>(builder: (context) => routePage));
   }
 
   ///pushReplacementName
@@ -89,8 +90,9 @@ class RouterUtils {
 
   /// pushNewPageBack  路由带参数返回
   void pushNewPageBack(Widget routePage, {Function callBack}) {
-    GlobalNavigator.push(CupertinoPageRoute(builder: (context) => routePage))
-        .then((data) {
+    GlobalNavigator.push(
+            CupertinoPageRoute<Route>(builder: (context) => routePage))
+        .then<dynamic>((data) {
       if (data != null) {
         callBack(data);
       }

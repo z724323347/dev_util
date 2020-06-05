@@ -1,5 +1,6 @@
-import 'package:date_range_picker/date_range_picker.dart';
+import 'package:date_range_picker/date_range_picker.dart' as pick;
 import 'package:dev_util/time/data_util.dart';
+import 'package:flutter/material.dart';
 
 /// 时间 utils
 class TimeUtil {
@@ -17,17 +18,25 @@ class TimeUtil {
   ///
   ///  return List<DateTime> picked
   Future<List<DateTime>> picked(
-    context, {
+    BuildContext context, {
     int day,
     bool after = true,
     DateTime firstDate,
     DateTime lastDate,
     List<DateTime> timeInterval,
   }) async {
-    final List<DateTime> picked = await showDatePicker(
+    final List<DateTime> picked = await pick.showDatePicker(
       context: context,
-      initialFirstDate: timeInterval.isNotEmpty ? timeInterval[0] : after ? DateTime.now() : DateTime.now().subtract(Duration(days: day ?? 7)),
-      initialLastDate: timeInterval.isNotEmpty ? timeInterval[1] : after ? DateTime.now().add(Duration(days: day ?? 7)) : DateTime.now(),
+      initialFirstDate: timeInterval.isNotEmpty
+          ? timeInterval[0]
+          : after
+              ? DateTime.now()
+              : DateTime.now().subtract(Duration(days: day ?? 7)),
+      initialLastDate: timeInterval.isNotEmpty
+          ? timeInterval[1]
+          : after
+              ? DateTime.now().add(Duration(days: day ?? 7))
+              : DateTime.now(),
       firstDate: firstDate ?? DateTime(2015),
       lastDate: lastDate ?? DateTime(2030),
     );
@@ -57,21 +66,20 @@ class TimeUtil {
     return dl;
   }
 
-  /// 小时转日期
-  static getDays(hours) {
-    var date;
-    DateTime today = new DateTime.now();
-    DateTime _date = today.subtract(new Duration(hours: hours));
+  static String getDays(int hours) {
+    String date;
+    DateTime today = DateTime.now();
+    DateTime _date = today.subtract(Duration(hours: hours));
     // date = new DateFormat('yyyy-MM-dd HH:mm:ss').format(_date).toString();
     date = DateUtil.getDateStrByTimeStr(_date.toString(),
         format: DateFormat.NORMAL);
     return date;
   }
 
-  static getDateTimeList(int day) {
-    if (day== 1) {
+  static Object getDateTimeList(int day) {
+    if (day == 1) {
       return DateTime.now();
-    } else if (day  == 2) {
+    } else if (day == 2) {
       return [DateTime.now().subtract(Duration(days: 1))];
     } else if (day == 7) {
       return [DateTime.now().subtract(Duration(days: 7)), DateTime.now()];

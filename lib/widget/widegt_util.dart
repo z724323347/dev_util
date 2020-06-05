@@ -17,7 +17,7 @@ class WidgetUtil {
       BuildContext context, bool isOnce, ValueChanged<Rect> onCallBack) {
     if (_hasMeasured) return;
     WidgetsBinding.instance.addPostFrameCallback((Duration timeStamp) {
-      RenderBox box = context.findRenderObject();
+      RenderBox box = context.findRenderObject() as RenderBox;
       if (box != null && box.semanticBounds != null) {
         if (isOnce) _hasMeasured = true;
         double width = box.semanticBounds.width;
@@ -43,7 +43,7 @@ class WidgetUtil {
   ///get Widget Bounds (width, height, left, top, right, bottom and so on).Widgets must be rendered completely.
   ///获取widget Rect
   static Rect getWidgetBounds(BuildContext context) {
-    RenderBox box = context.findRenderObject();
+    RenderBox box = context.findRenderObject() as RenderBox;
     return (box != null && box.semanticBounds != null)
         ? box.semanticBounds
         : Rect.zero;
@@ -52,7 +52,7 @@ class WidgetUtil {
   ///Get the coordinates of the widget on the screen.Widgets must be rendered completely.
   ///获取widget在屏幕上的坐标,widget必须渲染完成
   static Offset getWidgetLocalToGlobal(BuildContext context) {
-    RenderBox box = context.findRenderObject();
+    RenderBox box = context.findRenderObject() as RenderBox;
     return box == null ? Offset.zero : box.localToGlobal(Offset.zero);
   }
 

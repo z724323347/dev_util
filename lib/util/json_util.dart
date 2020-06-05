@@ -10,7 +10,7 @@ class JsonUtil {
   static T getObj<T>(String source, T f(Map v)) {
     if (source == null || source.isEmpty) return null;
     try {
-      Map map = json.decode(source);
+      Map map = json.decode(source) as Map;
       return map == null ? null : f(map);
     } catch (e) {
       print("JsonUtil convert error, Exception：${e.toString()}");
@@ -23,9 +23,9 @@ class JsonUtil {
     try {
       Map map;
       if (source is String) {
-        map = json.decode(source);
+        map = json.decode(source) as Map;
       } else {
-        map = source;
+        map = source as Map;
       }
       return map == null ? null : f(map);
     } catch (e) {
@@ -34,34 +34,34 @@ class JsonUtil {
     return null;
   }
 
-  static List<T> getObjList<T>(String source, T f(Map v)) {
-    if (source == null || source.isEmpty) return null;
-    try {
-      List list = json.decode(source);
-      return list?.map((value) {
-        return f(value);
-      })?.toList();
-    } catch (e) {
-      print("JsonUtil convert error, Exception：${e.toString()}");
-    }
-    return null;
-  }
+  // static List<T> getObjList<T>(String source, T f(Map v)) {
+  //   if (source == null || source.isEmpty) return null;
+  //   try {
+  //     List list = json.decode(source) as List;
+  //     return list?.map((value) {
+  //       return f(value);
+  //     })?.toList();
+  //   } catch (e) {
+  //     print("JsonUtil convert error, Exception：${e.toString()}");
+  //   }
+  //   return null;
+  // }
 
-  static List<T> getObjectList<T>(Object source, T f(Map v)) {
-    if (source == null || source.toString().isEmpty) return null;
-    try {
-      List list;
-      if (source is String) {
-        list = json.decode(source);
-      } else {
-        list = source;
-      }
-      return list?.map((value) {
-        return f(value);
-      })?.toList();
-    } catch (e) {
-      print("JsonUtil convert error, Exception：${e.toString()}");
-    }
-    return null;
-  }
+  // static List<T> getObjectList<T>(Object source, T f(Map v)) {
+  //   if (source == null || source.toString().isEmpty) return null;
+  //   try {
+  //     List list;
+  //     if (source is String) {
+  //       list = json.decode(source) as List;
+  //     } else {
+  //       list = source as List;
+  //     }
+  //     return list?.map((value) {
+  //       return f(value);
+  //     })?.toList();
+  //   } catch (e) {
+  //     print("JsonUtil convert error, Exception：${e.toString()}");
+  //   }
+  //   return null;
+  // }
 }

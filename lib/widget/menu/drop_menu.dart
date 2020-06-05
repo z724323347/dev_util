@@ -6,7 +6,8 @@ class DropMenuBuilder {
   final Widget dropDownWidget;
   final double dropDownHeight;
 
-  DropMenuBuilder({@required this.dropDownWidget, @required this.dropDownHeight});
+  DropMenuBuilder(
+      {@required this.dropDownWidget, @required this.dropDownHeight});
 }
 
 class DropMenu extends StatefulWidget {
@@ -27,7 +28,8 @@ class DropMenu extends StatefulWidget {
   _DropMenuState createState() => _DropMenuState();
 }
 
-class _DropMenuState extends State<DropMenu> with SingleTickerProviderStateMixin {
+class _DropMenuState extends State<DropMenu>
+    with SingleTickerProviderStateMixin {
   bool _isShowDropDownItemWidget = false;
   bool _isShowMask = false;
   bool _isControllerDisposed = false;
@@ -40,14 +42,12 @@ class _DropMenuState extends State<DropMenu> with SingleTickerProviderStateMixin
   void initState() {
     super.initState();
 
-    widget.controller.addListener(_onController);
-    _controller = new AnimationController(duration: Duration(milliseconds: widget.animationMilliseconds), vsync: this);
-  }
-
-  _onController() {
-//    print('_DropMenuState._onController ${widget.controller.menuIndex}');
-
-    _showDropDownItemWidget();
+    widget.controller.addListener(() {
+      _showDropDownItemWidget();
+    });
+    _controller = AnimationController(
+        duration: Duration(milliseconds: widget.animationMilliseconds),
+        vsync: this);
   }
 
   @override
@@ -63,7 +63,7 @@ class _DropMenuState extends State<DropMenu> with SingleTickerProviderStateMixin
     super.dispose();
   }
 
-  _showDropDownItemWidget() {
+  void _showDropDownItemWidget() {
     int menuIndex = widget.controller.menuIndex;
     if (menuIndex >= widget.menus.length || widget.menus[menuIndex] == null) {
       return;
@@ -73,15 +73,16 @@ class _DropMenuState extends State<DropMenu> with SingleTickerProviderStateMixin
     _isShowMask = !_isShowMask;
 
     var dropDownHeight2 = widget.menus[menuIndex].dropDownHeight;
-    _animation = new Tween(begin: 0.0, end: dropDownHeight2).animate(_controller)
-      ..addListener(() {
+    _animation =
+        new Tween(begin: 0.0, end: dropDownHeight2).animate(_controller)
+          ..addListener(() {
 //        print('${_animation.value}');
-        var heightScale = _animation.value / dropDownHeight2;
-        _maskColorOpacity = widget.maskColor.opacity * heightScale;
+            var heightScale = _animation.value / dropDownHeight2;
+            _maskColorOpacity = widget.maskColor.opacity * heightScale;
 //        print('$_maskColorOpacity');
-        //这行如果不写，没有动画效果
-        setState(() {});
-      });
+            //这行如果不写，没有动画效果
+            setState(() {});
+          });
 
     if (_isControllerDisposed) return;
 

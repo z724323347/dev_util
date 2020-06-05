@@ -27,6 +27,15 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  String get test {
+    return Intl.message(
+      '测试',
+      name: 'test',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get copy {
     return Intl.message(
       '复制',
