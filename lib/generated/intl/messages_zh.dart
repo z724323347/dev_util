@@ -19,12 +19,12 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'zh';
 
-  final messages = _notInlinedMessages();
-  static Map<String, Function> _notInlinedMessages() => <String, Function>{
-        "copied": MessageLookupByLibrary.simpleMessage("已复制"),
-        "copy": MessageLookupByLibrary.simpleMessage("复制"),
-        "showLess": MessageLookupByLibrary.simpleMessage("关闭"),
-        "showMore": MessageLookupByLibrary.simpleMessage("更多"),
-        "test": MessageLookupByLibrary.simpleMessage("测试")
-      };
+  final messages = _notInlinedMessages(_notInlinedMessages);
+  static _notInlinedMessages(_) => <String, Function> {
+    "copied" : MessageLookupByLibrary.simpleMessage("已复制"),
+    "copy" : MessageLookupByLibrary.simpleMessage("复制"),
+    "showLess" : MessageLookupByLibrary.simpleMessage("关闭"),
+    "showMore" : MessageLookupByLibrary.simpleMessage("更多"),
+    "test" : MessageLookupByLibrary.simpleMessage("测试")
+  };
 }

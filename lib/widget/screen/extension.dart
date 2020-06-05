@@ -19,3 +19,6 @@ extension DoubleFit on double {
     return WaHSizeFit.setRpx(this);
   }
 }
+extension StringX on String {
+  
+}
