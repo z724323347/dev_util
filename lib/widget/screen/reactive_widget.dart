@@ -1,5 +1,6 @@
-import 'package:dev_util/widget/screen_fit.dart';
 import 'package:flutter/material.dart';
+
+import 'screen_fit.dart';
 
 /// 响应式 widget
 class ReactiveWidget extends StatelessWidget {
