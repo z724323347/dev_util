@@ -71,6 +71,29 @@ class RouterUtils {
     )).then<dynamic>((data) => callBack(data));
   }
 
+  /// 带动画跳转
+  static Future pushReplaceAnimation(
+    Widget toPage, {
+    @required TransitionType type,
+    Widget fromPage,
+    Duration duration: const Duration(milliseconds: 500),
+    Curve curve: Curves.fastOutSlowIn,
+    SlideDirection direction: SlideDirection.right2left,
+    Axis axis: Axis.vertical,
+  }) {
+    return GlobalNavigator.pushReplacement(
+      RouteTransition(
+        type: type,
+        toPage: toPage,
+        fromPage: fromPage,
+        duration: duration,
+        curve: curve,
+        direction: direction,
+        axis: axis,
+      ),
+    );
+  }
+
   /// popAndPushNamed
   static void popAndPushNamed(String routeName) {
     GlobalNavigator.popAndPushNamed(routeName);
