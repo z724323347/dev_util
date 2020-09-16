@@ -61,7 +61,7 @@ class DevUtils {
   /// copy 复制文本
   void copy({String text}) {
     Clipboard.setData(ClipboardData(text: text ?? ''));
-    toast(S.of(context).copied ?? '');
+    // toast(S.of(context).copied ?? '');
   }
 
 }

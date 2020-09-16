@@ -169,7 +169,7 @@ class _ImageByNetWorkState extends State<ImageByNetWork> {
       matchTextDirection: widget.matchTextDirection,
       gaplessPlayback: widget.gaplessPlayback,
       filterQuality: widget.filterQuality,
-      isAntiAlias: widget.isAntiAlias,
+      // isAntiAlias: widget.isAntiAlias,
 
       /// 展示frame
       frameBuilder: (ctx, v, int frame, bool wasSynchronouslyLoaded) {

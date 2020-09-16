@@ -61,7 +61,7 @@ class Toast {
     toastView.controllerHide = controllerHide;
     toastView.overlayState = overlayState;
     preToast = toastView;
-    toastView.show(Duration(milliseconds: time ?? 200));
+    toastView.show(Duration(milliseconds: time ?? 1000));
   }
 
   static LayoutBuilder buildToastLayout(

@@ -13,6 +13,7 @@ class PopDialog {
         builder: (_) {
           return GestureDetector(
             child: AlertDialog(
+              actionsPadding: EdgeInsets.all(0),
               contentPadding: EdgeInsets.all(0),
               backgroundColor: Colors.transparent,
               content: child,

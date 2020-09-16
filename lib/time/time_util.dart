@@ -87,4 +87,30 @@ class TimeUtil {
       return DateTime.now();
     }
   }
+
+  ///根据给定的日期得到format后的日期 (2012-02-27 13:27:00.123456789)
+  static String getToDay(String dateOriginal) {
+    //现在的日期
+    var today = DateTime.now();
+    //今天的23:59:59
+    var standardDate = DateTime(today.year, today.month, today.day, 23, 59, 59);
+    //传入的日期与今天的23:59:59秒进行比较
+    Duration diff = standardDate.difference(DateTime.parse(dateOriginal));
+    // print('日期比较结果${diff.inDays}');
+    if (diff < Duration(days: 1)) {
+      //今天
+      // 09:20
+      // return dateOriginal.substring(11, 16);
+      return '今日';
+    } else if (diff >= Duration(days: 1) && diff < Duration(days: 2)) {
+      //昨天
+      //昨天09:20
+      // return "昨天 " + dateOriginal.substring(11, 16);
+      return "昨天";
+    } else {
+      //昨天之前
+      // 2019-01-23 09:20
+      return dateOriginal.substring(0, 10);
+    }
+  }
 }

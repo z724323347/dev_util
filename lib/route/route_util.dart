@@ -50,7 +50,7 @@ enum SlideDirection {
 ///  Animation RouterUtils
 class RouterUtils {
   /// 带动画跳转
-  static void pushWithAnimation(
+  static Future pushWithAnimation(
     Widget toPage, {
     @required TransitionType type,
     Widget fromPage,
@@ -68,7 +68,10 @@ class RouterUtils {
       curve: curve,
       direction: direction,
       axis: axis,
-    )).then<dynamic>((data) => callBack(data));
+    )).then<dynamic>((data) {
+      if (data == null) return;
+      callBack(data);
+    });
   }
 
   /// 带动画跳转
