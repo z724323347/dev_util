@@ -89,7 +89,7 @@ class TimeUtil {
   }
 
   ///根据给定的日期得到format后的日期 (2012-02-27 13:27:00.123456789)
-  static String getToDay(String dateOriginal) {
+  static String getToDay(String dateOriginal, {bool showToday = false}) {
     //现在的日期
     var today = DateTime.now();
     //今天的23:59:59
@@ -101,7 +101,11 @@ class TimeUtil {
       //今天
       // 09:20
       // return dateOriginal.substring(11, 16);
-      return '今日';
+      if (showToday) {
+        return dateOriginal.substring(11, 16);
+      } else {
+        return '今日';
+      }
     } else if (diff >= Duration(days: 1) && diff < Duration(days: 2)) {
       //昨天
       //昨天09:20
