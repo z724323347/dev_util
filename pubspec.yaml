@@ -30,6 +30,8 @@ dependencies:
   crypto: ">=2.0.6 <4.0.0"
   # https://github.com/dart-lang/convert
   convert: ">=1.0.0 <4.0.0"
+  # dio
+  dio: ^3.0.8
 
   # dartx: ^0.4.1
 
