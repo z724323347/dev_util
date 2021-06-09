@@ -13,32 +13,31 @@ class GlobalNavigator {
   /// @param barrierColor 背景色
   /// @param transitionDuration 弹出的过渡时长
   ///
-  static Future<T> dialog<T>({
-    @required WidgetBuilder builder,
-    bool barrierDismissible = true,
-    Color barrierColor = Colors.black54,
-    Duration transitionDuration = const Duration(milliseconds: 150)
-  }) {
+  static Future<T> dialog<T>(
+      {@required WidgetBuilder builder,
+      bool barrierDismissible = true,
+      Color barrierColor = Colors.black54,
+      Duration transitionDuration = const Duration(milliseconds: 150)}) {
     assert(builder != null);
     final BuildContext _diglogCtx = navigatorKey.currentState.overlay.context;
-    final ThemeData theme = Theme.of(_diglogCtx, shadowThemeOnly: true);
+    final ThemeData theme = Theme.of(_diglogCtx);
     return showGeneralDialog(
       context: _diglogCtx,
       barrierDismissible: barrierDismissible,
-      barrierLabel: MaterialLocalizations.of(_diglogCtx).modalBarrierDismissLabel,
+      barrierLabel:
+          MaterialLocalizations.of(_diglogCtx).modalBarrierDismissLabel,
       barrierColor: barrierColor,
       transitionDuration: transitionDuration,
       transitionBuilder: _buildMaterialDialogTransitions,
-      pageBuilder: (BuildContext buildContext, Animation<double> animation, Animation<double> secondaryAnimation) {
+      pageBuilder: (BuildContext buildContext, Animation<double> animation,
+          Animation<double> secondaryAnimation) {
         final Widget pageChild = Builder(builder: builder);
         return SafeArea(
-          child: Builder(
-            builder: (BuildContext context) {
-              return theme != null
-                  ? Theme(data: theme, child: pageChild)
-                  : pageChild;
-            }
-          ),
+          child: Builder(builder: (BuildContext context) {
+            return theme != null
+                ? Theme(data: theme, child: pageChild)
+                : pageChild;
+          }),
         );
       },
     );
@@ -46,7 +45,7 @@ class GlobalNavigator {
 
   /// Push a named route onto the navigator that most tightly encloses the given
   /// context.
-  static Future<T> pushNamed<T>(String name, { Map<String, dynamic> arguments }) {
+  static Future<T> pushNamed<T>(String name, {Map<String, dynamic> arguments}) {
     return navigatorKey.currentState.pushNamed<T>(name, arguments: arguments);
   }
 
@@ -58,7 +57,8 @@ class GlobalNavigator {
     TO result,
     Object arguments,
   }) {
-    return navigatorKey.currentState.pushReplacementNamed(routeName, result: result, arguments: arguments);
+    return navigatorKey.currentState
+        .pushReplacementNamed(routeName, result: result, arguments: arguments);
   }
 
   /// Pop the current route off the navigator that most tightly encloses the
@@ -67,8 +67,9 @@ class GlobalNavigator {
     String routeName, {
     TO result,
     Object arguments,
-   }) {
-    return navigatorKey.currentState.popAndPushNamed<T, TO>(routeName, arguments: arguments, result: result);
+  }) {
+    return navigatorKey.currentState.popAndPushNamed<T, TO>(routeName,
+        arguments: arguments, result: result);
   }
 
   /// Push the route with the given name onto the navigator that most tightly
@@ -79,7 +80,9 @@ class GlobalNavigator {
     RoutePredicate predicate, {
     Object arguments,
   }) {
-    return navigatorKey.currentState.pushNamedAndRemoveUntil<T>(newRouteName, predicate, arguments: arguments);
+    return navigatorKey.currentState.pushNamedAndRemoveUntil<T>(
+        newRouteName, predicate,
+        arguments: arguments);
   }
 
   /// Push the given route onto the navigator that most tightly encloses the
@@ -91,46 +94,55 @@ class GlobalNavigator {
   /// Replace the current route of the navigator that most tightly encloses the
   /// given context by pushing the given route and then disposing the previous
   /// route once the new route has finished animating in.
-  static Future<T> pushReplacement<T extends Object, TO extends Object>(Route<T> newRoute, { TO result }) {
-    return navigatorKey.currentState.pushReplacement<T, TO>(newRoute, result: result);
+  static Future<T> pushReplacement<T extends Object, TO extends Object>(
+      Route<T> newRoute,
+      {TO result}) {
+    return navigatorKey.currentState
+        .pushReplacement<T, TO>(newRoute, result: result);
   }
 
   /// Push the given route onto the navigator that most tightly encloses the
   /// given context, and then remove all the previous routes until the
   /// `predicate` returns true.
-  static Future<T> pushAndRemoveUntil<T extends Object>(Route<T> newRoute, RoutePredicate predicate) {
+  static Future<T> pushAndRemoveUntil<T extends Object>(
+      Route<T> newRoute, RoutePredicate predicate) {
     return navigatorKey.currentState.pushAndRemoveUntil<T>(newRoute, predicate);
   }
 
   /// Replaces a route on the navigator that most tightly encloses the given
   /// context with a new route.
-  static void replace<T extends Object>({ @required Route<dynamic> oldRoute, @required Route<T> newRoute }) {
-    return navigatorKey.currentState.replace<T>(oldRoute: oldRoute, newRoute: newRoute);
+  static void replace<T extends Object>(
+      {@required Route<dynamic> oldRoute, @required Route<T> newRoute}) {
+    return navigatorKey.currentState
+        .replace<T>(oldRoute: oldRoute, newRoute: newRoute);
   }
 
   /// Replaces a route on the navigator that most tightly encloses the given
   /// context with a new route. The route to be replaced is the one below the
   /// given `anchorRoute`.
-  static void replaceRouteBelow<T extends Object>({ @required Route<dynamic> anchorRoute, Route<T> newRoute }) {
-    return navigatorKey.currentState.replaceRouteBelow<T>(anchorRoute: anchorRoute, newRoute: newRoute);
+  static void replaceRouteBelow<T extends Object>(
+      {@required Route<dynamic> anchorRoute, Route<T> newRoute}) {
+    return navigatorKey.currentState
+        .replaceRouteBelow<T>(anchorRoute: anchorRoute, newRoute: newRoute);
   }
 
   /// Whether the navigator that most tightly encloses the given context can be
   /// popped.
   static bool canPop() {
-    return navigatorKey.currentWidget != null && navigatorKey.currentState.canPop();
+    return navigatorKey.currentWidget != null &&
+        navigatorKey.currentState.canPop();
   }
 
   /// Returns the value of the current route's [Route.willPop] method for the
   /// navigator that most tightly encloses the given context.
-  static Future<bool> maybePop<T extends Object>([ T result ]) {
+  static Future<bool> maybePop<T extends Object>([T result]) {
     return navigatorKey.currentState.maybePop<T>(result);
   }
 
   /// Pop the top-most route off the navigator that most tightly encloses the
   /// given context.
-  static void pop<T extends Object>([ T result ]) {
-     navigatorKey.currentState.pop<T>(result);
+  static void pop<T extends Object>([T result]) {
+    navigatorKey.currentState.pop<T>(result);
   }
 
   /// Calls [pop] repeatedly on the navigator that most tightly encloses the
@@ -153,7 +165,11 @@ class GlobalNavigator {
   }
 }
 
-Widget _buildMaterialDialogTransitions(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+Widget _buildMaterialDialogTransitions(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child) {
   return FadeTransition(
     opacity: CurvedAnimation(
       parent: animation,

@@ -135,5 +135,19 @@ class _DefaultCupertinoLocalizations extends CupertinoLocalizations {
   String get modalBarrierDismissLabel => _en.modalBarrierDismissLabel;
 
   @override
-  String tabSemanticsLabel({int tabIndex, int tabCount}) => _en.tabSemanticsLabel(tabIndex:tabIndex,tabCount:tabCount);
+  String tabSemanticsLabel({int tabIndex, int tabCount}) =>
+      _en.tabSemanticsLabel(tabIndex: tabIndex, tabCount: tabCount);
+
+  @override
+  String get searchTextFieldPlaceholderLabel =>
+      _en.searchTextFieldPlaceholderLabel;
+
+  @override
+  List<String> get timerPickerHourLabels => _en.timerPickerHourLabels;
+
+  @override
+  List<String> get timerPickerMinuteLabels => _en.timerPickerMinuteLabels;
+
+  @override
+  List<String> get timerPickerSecondLabels => _en.timerPickerSecondLabels;
 }

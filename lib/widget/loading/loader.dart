@@ -83,7 +83,7 @@ class Loader<T> extends StatefulWidget {
   final WidgetBuilder loadingBuilder;
 
   static LoaderState<T> of<T>(BuildContext context) {
-    return context.ancestorStateOfType(const TypeMatcher<LoaderState>());
+    return context.findAncestorStateOfType<LoaderState>();
     // return context.findAncestorStateOfType();
   }
 
@@ -228,7 +228,6 @@ class LoaderState<T> extends State<Loader> {
   }
 }
 
-
 ///a list view
 ///auto load more when reached the bottom
 class AutoLoadMoreList<T> extends StatefulWidget {
@@ -366,4 +365,3 @@ class _ItemLoadMore extends StatelessWidget {
     );
   }
 }
-

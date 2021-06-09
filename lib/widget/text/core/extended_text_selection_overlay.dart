@@ -349,7 +349,7 @@ class ExtendedTextSelectionOverlay {
                 endpoints,
                 selectionDelegate,
                 clipboardStatus,
-                // renderObject.lastSecondaryTapDownPosition,
+                renderObject.lastSecondaryTapDownPosition,
               );
             },
           ),
